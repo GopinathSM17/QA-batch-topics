@@ -7,10 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @SpringBootApplication
 public class CoreJavaTopicsApplication {
@@ -33,6 +29,10 @@ public class CoreJavaTopicsApplication {
         IplQuestion.extraRunsIn2016ByEachTeam(matches, deliveries);
 
         IplQuestion.economicalBowlerIn2015(matches, deliveries);
+
+        IplQuestion.mostPlayerOfTheMatch(matches);
+
+        IplQuestion.mostPlayerOfTheMatchInSpecificYear(matches, 2010);
 
     }
 

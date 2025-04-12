@@ -31,6 +31,7 @@ public class IplQuestion {
 
     // 2nd question - Number of matches won of all teams over all the years of IPL.
     public static HashMap allYearsAndWinnerInIpl(JSONArray matches){
+        System.out.println();
         Map<String, Map<String, Integer>> seasonWins = new TreeMap<>();
         for (int i = 0; i < matches.length(); i++) {
             JSONObject match = matches.getJSONObject(i);
@@ -65,6 +66,7 @@ public class IplQuestion {
 
     // 3rd question - For the year 2016 get the extra runs conceded per team.
     public static Map extraRunsIn2016ByEachTeam(JSONArray matches, JSONArray deliveries){
+        System.out.println();
         Map<String, Integer> map=new HashMap<>();
 
         for (int i = 0; i < deliveries.length(); i++) {
@@ -97,6 +99,7 @@ public class IplQuestion {
 
     // 4th question - For the year 2015 get the top economical bowlers.
     public static HashMap economicalBowlerIn2015(JSONArray matches, JSONArray deliveries){
+        System.out.println();
         Map<String, Integer> bowlerBalls = new HashMap<>();
         Map<String, Integer> bowlerRuns = new HashMap<>();
 
@@ -151,5 +154,66 @@ public class IplQuestion {
         return null;
     }
 
-    // 5th question -
+    // 5th question - Most player of the match
+    public  static  String mostPlayerOfTheMatch(JSONArray matches){
+        System.out.println();
+        Map<String, Integer> map =new HashMap<>();
+
+        for (int i = 0; i < matches.length(); i++) {
+            JSONObject match = matches.getJSONObject(i);
+            String playerName = match.getString("player_of_match");
+
+            if(map.containsKey(playerName)){
+                map.put(playerName, map.get(playerName) + 1);
+            }
+            else{
+                map.put(playerName, 1);
+            }
+        }
+
+        String bestPlayer = "";
+        int bestMom = 0;
+        for(String player : map.keySet()){
+            int currMom = map.get(player);
+            if(currMom > bestMom){
+                bestMom = currMom;
+                bestPlayer = player;
+            }
+        }
+
+        System.out.println("The most player of the match goes to "+ bestPlayer + " who has --> " + bestMom);
+        return  "";
+    }
+
+    // 6th question - Most player of the match in a specific year
+    public static String mostPlayerOfTheMatchInSpecificYear(JSONArray matches,int year){
+        System.out.println();
+        HashMap<String,Integer> map = new HashMap<>();
+
+        for (int i = 0; i < matches.length(); i++) {
+            JSONObject match = matches.getJSONObject(i);
+            int season = match.getInt("season");
+            if(season == year){
+                String player = match.getString("player_of_match");
+                if(map.containsKey(player)){
+                    map.put(player, map.get(player)+1);
+                }
+                else{
+                    map.put(player, 1);
+                }
+            }
+        }
+        String bestPlayer = "";
+        int bestMom = 0;
+        for(String player : map.keySet()){
+            int currMom = map.get(player);
+            if(currMom > bestMom){
+                bestMom = currMom;
+                bestPlayer = player;
+            }
+        }
+
+        System.out.println("The most player of the match on year "+ year +" goes to "+ bestPlayer + " who has --> " + bestMom);
+        return "";
+    }
 }
